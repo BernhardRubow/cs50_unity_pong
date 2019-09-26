@@ -16,16 +16,26 @@ public class ScoreBoardController : MonoBehaviour
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnEnable()
     {
-        NvpEventBus.Events(GameEvents.State_Started_Entered).GameEventHandler += OnGameStarted;
+        NvpEventBus.Events(GameEvents.State_Started_Enter).GameEventHandler += OnState_Started_Entered;
+        NvpEventBus.Events(GameEvents.State_Serve_Enter).GameEventHandler += OnState_Serve_Entered;
+        
     }
 
     private void OnDisable()
     {
-        NvpEventBus.Events(GameEvents.State_Started_Entered).GameEventHandler -= OnGameStarted;
+        NvpEventBus.Events(GameEvents.State_Started_Enter).GameEventHandler -= OnState_Started_Entered;
+        NvpEventBus.Events(GameEvents.State_Serve_Enter).GameEventHandler -= OnState_Serve_Entered;
     }
 
-    private void OnGameStarted(object sender, EventArgs e)
+    // +++ eventhandler +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    private void OnState_Started_Entered(object sender, EventArgs e)
     {
         _startMessage.gameObject.SetActive(true);
+    }
+
+    private void OnState_Serve_Entered(object sender, EventArgs e)
+    {
+        _startMessage.gameObject.SetActive(false);
+        _serveMessage.gameObject.SetActive(true);
     }
 }

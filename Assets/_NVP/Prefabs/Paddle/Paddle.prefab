@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7634287386080733597}
   - component: {fileID: 7634287386080733596}
   - component: {fileID: 7634287386080733538}
+  - component: {fileID: 7957214603311752319}
   m_Layer: 0
   m_Name: Paddle
-  m_TagString: Untagged
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,8 +63,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveForce: 100
-  _upEvent: LeftPlayerUp
-  _downEvent: LeftPlayerDown
+  _upEvent: 1
+  _downEvent: 2
+--- !u!65 &7957214603311752319
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7634287386080733599}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7634287386198397504
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +89,6 @@ GameObject:
   - component: {fileID: 7634287386198397505}
   - component: {fileID: 7634287386198397508}
   - component: {fileID: 7634287386198397511}
-  - component: {fileID: 7634287386198397510}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -143,16 +156,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7634287386198397510
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7634287386198397504}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

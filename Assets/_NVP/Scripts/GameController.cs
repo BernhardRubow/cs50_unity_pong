@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
     private void Start_Enter()
     {
         GameState = "Start";
-        NvpEventBus.Events(GameEvents.State_Started_Entered).TriggerEvent(this, null);
+        NvpEventBus.Events(GameEvents.State_Started_Enter).TriggerEvent(this, null);
         GameStateUpdate = Start_Update;
     }
 
@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
     {
         GameState = "Serve";
 
-        NvpEventBus.Events(GameEvents.PrepareServerBall).TriggerEvent(
+        NvpEventBus.Events(GameEvents.State_Serve_Enter).TriggerEvent(
             this,
             new DefaultEventArgs()
             {
@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
 
     private void Serve_Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             NvpEventBus.Events(GameEvents.ServeBall).TriggerEvent(
                 this,

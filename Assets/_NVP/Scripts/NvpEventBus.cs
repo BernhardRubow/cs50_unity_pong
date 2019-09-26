@@ -5,12 +5,12 @@ namespace nvp.events
 {
     public enum GameEvents
     {
-        State_Started_Entered,
+        State_Started_Enter,
         LeftPlayerUp,
         LeftPlayerDown,
         RightPlayerUp,
         RightPlayerDown,
-        PrepareServerBall,
+        State_Serve_Enter,
         ServeBall
     }
 
