@@ -2,11 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using nvp.events;
 
 public class GameController : MonoBehaviour
 {
     public string GameState = "Idle";
     public System.Action GameStateUpdate;
+
+
+    public int currentPlayer = 1;
 
 
     private void Start()
@@ -16,12 +20,12 @@ public class GameController : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDisable()
     {
-        
+
     }
 
     private void Update()
@@ -33,6 +37,7 @@ public class GameController : MonoBehaviour
     private void Start_Enter()
     {
         GameState = "Start";
+        NvpEventBus.Events(GameEvents.State_Started_Entered).TriggerEvent(this, null);
         GameStateUpdate = Start_Update;
     }
 
@@ -40,8 +45,13 @@ public class GameController : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            GameStateUpdate = Run_Enter;
+            Start_LeaveTo(Run_Enter);
         }
+    }
+
+    private void Start_LeaveTo(Action nextStateEnterAction)
+    {
+        GameStateUpdate = nextStateEnterAction;
     }
 
     // +++ run state +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -54,20 +64,39 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
             GameStateUpdate = Serve_Enter;
         }
     }
+
+    
 
     // +++ serve state ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void Serve_Enter()
     {
         GameState = "Serve";
+
+        NvpEventBus.Events(GameEvents.PrepareServerBall).TriggerEvent(
+            this,
+            new DefaultEventArgs()
+            {
+                Value = currentPlayer
+            });
+
         GameStateUpdate = Serve_Update;
     }
 
     private void Serve_Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            NvpEventBus.Events(GameEvents.ServeBall).TriggerEvent(
+                this,
+                new DefaultEventArgs()
+                {
+                    Value = currentPlayer
+                });
+        }
     }
+     
+    
 }

@@ -15,12 +15,12 @@ public class KeyboardController : MonoBehaviour
     void FixedUpdate()
     {
         // left player
-        if (Input.GetKey(KeyCode.W)) NvpEventBus.Events("LeftPlayerUp").TriggerEvent(this, null);
-        if (Input.GetKey(KeyCode.S)) NvpEventBus.Events("LeftPlayerDown").TriggerEvent(this, null);
+        if (Input.GetKey(KeyCode.W)) NvpEventBus.Events(GameEvents.LeftPlayerUp).TriggerEvent(this, null);
+        if (Input.GetKey(KeyCode.S)) NvpEventBus.Events(GameEvents.LeftPlayerDown).TriggerEvent(this, null);
 
 
-        if (Input.GetKey(KeyCode.UpArrow)) NvpEventBus.Events("RightPlayerUp").TriggerEvent(this, null);
-        if (Input.GetKey(KeyCode.DownArrow)) NvpEventBus.Events("RightPlayerDown").TriggerEvent(this, null);
+        if (Input.GetKey(KeyCode.UpArrow)) NvpEventBus.Events(GameEvents.RightPlayerUp).TriggerEvent(this, null);
+        if (Input.GetKey(KeyCode.DownArrow)) NvpEventBus.Events(GameEvents.RightPlayerDown).TriggerEvent(this, null);
 
         
     }

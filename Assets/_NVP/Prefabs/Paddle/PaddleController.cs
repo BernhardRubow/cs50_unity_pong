@@ -10,8 +10,8 @@ public class PaddleController : MonoBehaviour
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     [SerializeField] private float _moveForce;
 
-    [SerializeField] private string _upEvent;
-    [SerializeField] private string _downEvent;
+    [SerializeField] private GameEvents _upEvent;
+    [SerializeField] private GameEvents _downEvent;
 
     private Rigidbody _rb;
 

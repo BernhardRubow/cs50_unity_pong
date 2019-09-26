@@ -3,16 +3,27 @@ using System.Collections.Generic;
 
 namespace nvp.events
 {
+    public enum GameEvents
+    {
+        State_Started_Entered,
+        LeftPlayerUp,
+        LeftPlayerDown,
+        RightPlayerUp,
+        RightPlayerDown,
+        PrepareServerBall,
+        ServeBall
+    }
+
     public class NvpEventBus
     {
-        private static readonly Dictionary<string, GameEventWrapper> EventHandlers;
+        private static readonly Dictionary<GameEvents, GameEventWrapper> EventHandlers;
 
         static NvpEventBus()
         {
-            EventHandlers = new Dictionary<string, GameEventWrapper>();
+            EventHandlers = new Dictionary<GameEvents, GameEventWrapper>();
         }
 
-        public static GameEventWrapper Events(string eventName)
+        public static GameEventWrapper Events(GameEvents eventName)
         {
             if (!EventHandlers.ContainsKey(eventName))
                 EventHandlers[eventName] = new GameEventWrapper();
