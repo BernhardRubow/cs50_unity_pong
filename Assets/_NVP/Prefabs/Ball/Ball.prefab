@@ -153,5 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a229b1d4055cad4ead11530f7e17562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _directon: {x: 1, y: 1, z: 0}
-  _moveSpeed: 5
+  _direction: {x: 1, y: 1, z: 0}
+  _moveSpeed: 10
+  _YReflectionRange: 0.75

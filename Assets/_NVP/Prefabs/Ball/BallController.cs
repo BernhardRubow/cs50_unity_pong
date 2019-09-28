@@ -7,8 +7,9 @@ using System;
 public class BallController : MonoBehaviour
 {
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    [SerializeField] private Vector3 _directon;
+    [SerializeField] private Vector3 _direction;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _YReflectionRange;
 
     private Vector3 _lastSpeed;
 
@@ -36,7 +37,7 @@ public class BallController : MonoBehaviour
     {
         if (_paused) return;
 
-        _t.Translate(_directon * _moveSpeed * Time.deltaTime,Space.World);
+        _t.Translate(_direction * _moveSpeed * Time.deltaTime,Space.World);
 
     }
 
@@ -49,23 +50,29 @@ public class BallController : MonoBehaviour
     {
         Debug.Log("Hit " + other.tag);   
         if(other.tag == "Wall"){
-            _directon.y *= -1;
-            if(_t.position.y > 0){
-                _t.position = new Vector3(_t.position.x, _t.position.y - _t.localScale.y, 0);
-            }
-            else {                
-                _t.position = new Vector3(_t.position.x, _t.position.y + _t.localScale.y, 0);
-            }
+            _direction.y *= -1;
+            
         }
         else if(other.tag == "Paddle"){
-            _directon.x *= -1;
-            _directon *= 1.03f;
-            if(_t.position.x > 0){
-                _t.position = new Vector3(_t.position.x - _t.localScale.x, _t.position.y - _t.localScale.x, 0);
-            }
-            else {                
-                _t.position = new Vector3(_t.position.x  + _t.localScale.x, _t.position.y, 0);
-            }
+            _direction.x *= -1;
+            _direction *= 1.03f;
+            _direction *= 1;
+
+            _direction = ChangeAfterPaddleHit(_direction);
+            
         }
+    }
+
+    // +++ class methode ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    private Vector3 ChangeAfterPaddleHit(Vector3 directon)
+    {
+        float mag = directon.magnitude;
+        directon = directon.normalized;
+
+        directon.y = UnityEngine.Random.Range(-_YReflectionRange, _YReflectionRange);
+        Debug.Log (directon);
+        directon = directon.normalized * mag;
+
+        return directon;
     }
 }
