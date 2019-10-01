@@ -12,7 +12,8 @@ namespace nvp.events
         RightPlayerDown,
         State_Serve_Enter,
         ServeBall,
-        PlayerScores
+        PlayerScores,
+        ScoresChanged
     }
 
     public class NvpEventBus
@@ -51,5 +52,10 @@ namespace nvp.events
 
     public class StringEventArgs : EventArgs{
         public string Value;
+    }
+
+    public class ScoreEventArgs : EventArgs{
+        public int scoreLeftPlayer;
+        public int scoreRightPlayer;
     }
 }

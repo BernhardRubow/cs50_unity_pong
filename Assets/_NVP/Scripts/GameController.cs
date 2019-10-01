@@ -11,8 +11,11 @@ public class GameController : MonoBehaviour
 
 
     public int currentPlayer = 1;
+    public int playerLeftScore = 0;
+    public int playerRightScore = 0;
 
 
+    // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void Start()
     {
         GameStateUpdate = Start_Enter;
@@ -20,7 +23,7 @@ public class GameController : MonoBehaviour
 
     private void OnEnable()
     {
-
+        NvpEventBus.Events(GameEvents.PlayerScores).GameEventHandler += OnPlayerScores;
     }
 
     private void OnDisable()
@@ -32,6 +35,30 @@ public class GameController : MonoBehaviour
     {
         GameStateUpdate();
     }
+
+
+    // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    private void OnPlayerScores(object sender, EventArgs e)
+    {
+        var ea = (StringEventArgs)e;
+
+        if(ea.Value == "left"){
+            playerLeftScore ++;
+        }
+        else if(ea.Value == "right"){
+            playerRightScore ++;
+        }
+
+        var eventArgs = new ScoreEventArgs {
+            scoreLeftPlayer = playerLeftScore,
+            scoreRightPlayer = playerRightScore
+        };
+        
+        NvpEventBus.Events(GameEvents.ScoresChanged).TriggerEvent(this, eventArgs);
+    }
+
+
+
 
     // +++ start state ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void Start_Enter()

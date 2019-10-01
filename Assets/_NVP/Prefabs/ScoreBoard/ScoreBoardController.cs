@@ -8,8 +8,11 @@ using TMPro;
 public class ScoreBoardController : MonoBehaviour
 {
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    [SerializeField] TextMeshProUGUI _leftPlayerScore;
+    [SerializeField] TextMeshProUGUI _rightPlayerScore;
     [SerializeField] TextMeshProUGUI _startMessage;
     [SerializeField] TextMeshProUGUI _serveMessage;
+
 
 
 
@@ -18,6 +21,8 @@ public class ScoreBoardController : MonoBehaviour
     {
         NvpEventBus.Events(GameEvents.State_Started_Enter).GameEventHandler += OnState_Started_Entered;
         NvpEventBus.Events(GameEvents.State_Serve_Enter).GameEventHandler += OnState_Serve_Entered;
+
+        NvpEventBus.Events(GameEvents.ScoresChanged).GameEventHandler += OnPlayerScores;
         
     }
 
@@ -25,7 +30,12 @@ public class ScoreBoardController : MonoBehaviour
     {
         NvpEventBus.Events(GameEvents.State_Started_Enter).GameEventHandler -= OnState_Started_Entered;
         NvpEventBus.Events(GameEvents.State_Serve_Enter).GameEventHandler -= OnState_Serve_Entered;
+
+        NvpEventBus.Events(GameEvents.ScoresChanged).GameEventHandler -= OnPlayerScores;
     }
+
+
+
 
     // +++ eventhandler +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnState_Started_Entered(object sender, EventArgs e)
@@ -37,5 +47,13 @@ public class ScoreBoardController : MonoBehaviour
     {
         _startMessage.gameObject.SetActive(false);
         _serveMessage.gameObject.SetActive(true);
+    }
+
+    private void OnPlayerScores(object sender, EventArgs e)
+    {
+        var scoreEventArgs = (ScoreEventArgs)e;
+
+        _leftPlayerScore.text = scoreEventArgs.scoreLeftPlayer.ToString();
+        _rightPlayerScore.text = scoreEventArgs.scoreRightPlayer.ToString();
     }
 }
