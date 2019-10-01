@@ -24,12 +24,12 @@ public class BallController : MonoBehaviour
 
     void OnEnable()
     {
-        NvpEventBus.Events(GameEvents.ServeBall).GameEventHandler += OnServeBall;
+        NvpEventBus.Events(GameEvents.OnLaunchBall).GameEventHandler += OnServeBall;
     }
 
     private void OnDisable()
     {
-        NvpEventBus.Events(GameEvents.ServeBall).GameEventHandler -= OnServeBall;
+        NvpEventBus.Events(GameEvents.OnLaunchBall).GameEventHandler -= OnServeBall;
     }
 
     void Update()
@@ -47,6 +47,7 @@ public class BallController : MonoBehaviour
     {
         _paused = false;
     }
+    
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Hit " + other.tag);   
@@ -64,7 +65,7 @@ public class BallController : MonoBehaviour
         }
     }
 
-    // +++ class methode ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // +++ class methods ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private Vector3 ChangeAfterPaddleHit(Vector3 directon)
     {
         float mag = directon.magnitude;
@@ -92,7 +93,7 @@ public class BallController : MonoBehaviour
                 eventArgs.Value = "left";
             }
 
-            NvpEventBus.Events(GameEvents.PlayerScores).TriggerEvent(this, eventArgs);
+            NvpEventBus.Events(GameEvents.OnPlayerScores).TriggerEvent(this, eventArgs);
 
             PrepareBallForServe();
         }

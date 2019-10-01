@@ -12,6 +12,8 @@ public class ScoreBoardController : MonoBehaviour
     [SerializeField] TextMeshProUGUI _rightPlayerScore;
     [SerializeField] TextMeshProUGUI _startMessage;
     [SerializeField] TextMeshProUGUI _serveMessage;
+    [SerializeField] TextMeshProUGUI _gameOverMessage;
+    [SerializeField] TextMeshProUGUI _gameOverHintMessage;
 
 
 
@@ -19,28 +21,36 @@ public class ScoreBoardController : MonoBehaviour
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnEnable()
     {
-        NvpEventBus.Events(GameEvents.State_Started_Enter).GameEventHandler += OnState_Started_Entered;
-        NvpEventBus.Events(GameEvents.State_Serve_Enter).GameEventHandler += OnState_Serve_Entered;
+        NvpEventBus.Events(GameEvents.OnClearScoreboard).GameEventHandler += OnClearScoreboard;
+        NvpEventBus.Events(GameEvents.OnServeBall).GameEventHandler += OnState_Serve_Entered;
+        NvpEventBus.Events(GameEvents.OnLaunchBall).GameEventHandler += OnBallLaunch;
+        NvpEventBus.Events(GameEvents.OnGameOver).GameEventHandler += OnGameOver;
 
-        NvpEventBus.Events(GameEvents.ScoresChanged).GameEventHandler += OnPlayerScores;
+        NvpEventBus.Events(GameEvents.OnScoreChanged).GameEventHandler += OnPlayerScores;
         
     }
 
+
     private void OnDisable()
     {
-        NvpEventBus.Events(GameEvents.State_Started_Enter).GameEventHandler -= OnState_Started_Entered;
-        NvpEventBus.Events(GameEvents.State_Serve_Enter).GameEventHandler -= OnState_Serve_Entered;
+        NvpEventBus.Events(GameEvents.OnClearScoreboard).GameEventHandler -= OnClearScoreboard;
+        NvpEventBus.Events(GameEvents.OnServeBall).GameEventHandler -= OnState_Serve_Entered;
+        NvpEventBus.Events(GameEvents.OnLaunchBall).GameEventHandler -= OnBallLaunch;
+        NvpEventBus.Events(GameEvents.OnGameOver).GameEventHandler -= OnGameOver;
 
-        NvpEventBus.Events(GameEvents.ScoresChanged).GameEventHandler -= OnPlayerScores;
+        NvpEventBus.Events(GameEvents.OnScoreChanged).GameEventHandler -= OnPlayerScores;
     }
 
 
 
 
     // +++ eventhandler +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    private void OnState_Started_Entered(object sender, EventArgs e)
+    private void OnClearScoreboard(object sender, EventArgs e)
     {
         _startMessage.gameObject.SetActive(true);
+        _startMessage.gameObject.SetActive(true);
+        _gameOverMessage.gameObject.SetActive(false);
+        _gameOverHintMessage.gameObject.SetActive(false);
     }
 
     private void OnState_Serve_Entered(object sender, EventArgs e)
@@ -55,5 +65,16 @@ public class ScoreBoardController : MonoBehaviour
 
         _leftPlayerScore.text = scoreEventArgs.scoreLeftPlayer.ToString();
         _rightPlayerScore.text = scoreEventArgs.scoreRightPlayer.ToString();
+    }
+
+    private void OnBallLaunch(object sender, EventArgs e)
+    {
+        _serveMessage.gameObject.SetActive(false);
+    }
+
+    private void OnGameOver(object sender, EventArgs e)
+    {
+       _gameOverMessage.gameObject.SetActive(true);
+       _gameOverHintMessage.gameObject.SetActive(true);
     }
 }
