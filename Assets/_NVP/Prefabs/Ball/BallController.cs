@@ -12,7 +12,6 @@ public class BallController : MonoBehaviour
     [SerializeField] private float _YReflectionRange;
 
     private Vector3 _lastSpeed;
-
     private bool _paused = true;
     private Transform _t;
 
@@ -38,6 +37,8 @@ public class BallController : MonoBehaviour
         if (_paused) return;
 
         _t.Translate(_direction * _moveSpeed * Time.deltaTime,Space.World);
+
+        CheckPlayerScored();
 
     }
 
@@ -70,9 +71,36 @@ public class BallController : MonoBehaviour
         directon = directon.normalized;
 
         directon.y = UnityEngine.Random.Range(-_YReflectionRange, _YReflectionRange);
-        Debug.Log (directon);
         directon = directon.normalized * mag;
 
         return directon;
+    }
+
+    private void CheckPlayerScored()
+    {
+        var x = _t.position.x;
+        if(Mathf.Abs(x) > 33f){
+            
+            var eventArgs = new StringEventArgs();
+
+            if(x < 0){
+                // right player scores
+                eventArgs.Value = "right";
+            }
+            else{
+                 // left player scores
+                eventArgs.Value = "left";
+            }
+
+            NvpEventBus.Events(GameEvents.PlayerScores).TriggerEvent(this, eventArgs);
+
+            PrepareBallForServe();
+        }
+    }
+
+    private void PrepareBallForServe()
+    {
+        _t.position = Vector3.zero;
+        _paused = true;
     }
 }

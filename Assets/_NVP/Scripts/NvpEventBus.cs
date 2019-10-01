@@ -11,7 +11,8 @@ namespace nvp.events
         RightPlayerUp,
         RightPlayerDown,
         State_Serve_Enter,
-        ServeBall
+        ServeBall,
+        PlayerScores
     }
 
     public class NvpEventBus
@@ -46,5 +47,9 @@ namespace nvp.events
     public class DefaultEventArgs : EventArgs
     {
         public object Value;
+    }
+
+    public class StringEventArgs : EventArgs{
+        public string Value;
     }
 }
