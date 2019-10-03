@@ -10,16 +10,20 @@ public class BallController : MonoBehaviour
     [SerializeField] private Vector3 _direction;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _YReflectionRange;
+    [SerializeField] private NvpAudioEvent bouceAudioEffect;
+    [SerializeField] AudioSource _audio;
 
     private Vector3 _lastSpeed;
     private bool _paused = true;
     private Transform _t;
 
 
+
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     void Start()
     {
         _t = this.transform;
+        _audio = this.GetComponent<AudioSource>();
     }
 
     void OnEnable()
@@ -53,6 +57,7 @@ public class BallController : MonoBehaviour
         Debug.Log("Hit " + other.tag);   
         if(other.tag == "Wall"){
             _direction.y *= -1;
+            bouceAudioEffect.Play(_audio);
             
         }
         else if(other.tag == "Paddle"){
@@ -61,7 +66,8 @@ public class BallController : MonoBehaviour
             _direction *= 1;
 
             _direction = ChangeAfterPaddleHit(_direction);
-            
+
+            bouceAudioEffect.Play(_audio);
         }
     }
 
@@ -102,6 +108,7 @@ public class BallController : MonoBehaviour
     private void PrepareBallForServe()
     {
         _t.position = Vector3.zero;
+        _direction = _direction.normalized;
         _paused = true;
     }
 }

@@ -186,6 +186,108 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &390141436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6547747947929109386, guid: 3ca44e07d73faab4a8c54d4ba6e34863,
+    type: 3}
+  m_PrefabInstance: {fileID: 4757969034859770231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &390141437
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390141436}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,8 +361,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.3509887e-38, y: -8.796898e+12, z: 3.323071e+35,
-    w: -1.7014118e+38}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -435,12 +536,12 @@ PrefabInstance:
     - target: {fileID: 7634287386080733538, guid: 67add3a43442cd341a01b5ff54fed9d8,
         type: 3}
       propertyPath: _upEvent
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7634287386080733538, guid: 67add3a43442cd341a01b5ff54fed9d8,
         type: 3}
       propertyPath: _downEvent
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67add3a43442cd341a01b5ff54fed9d8, type: 3}
@@ -687,6 +788,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 781861691, guid: 3ca44e07d73faab4a8c54d4ba6e34863, type: 3}
+      propertyPath: bouceAudioEffect
+      value: 
+      objectReference: {fileID: 11400000, guid: c3617da7edc2a4848a3abde6441595f2,
+        type: 2}
+    - target: {fileID: 781861691, guid: 3ca44e07d73faab4a8c54d4ba6e34863, type: 3}
+      propertyPath: _audio
+      value: 
+      objectReference: {fileID: 390141437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca44e07d73faab4a8c54d4ba6e34863, type: 3}
 --- !u!1001 &7634287385453850338
